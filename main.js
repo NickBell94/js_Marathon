@@ -65,4 +65,5 @@ function disableButton (){
 function random (num) {
     return Math.ceil(Math.random () * num);
 }
+
 init ();
