@@ -69,9 +69,6 @@ function random (num) {
 
 
 
-function check() {
-    console.log('start')
-};
-check();
+
 
 init ();
