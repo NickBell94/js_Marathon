@@ -1,6 +1,7 @@
 const  $btn = document.getElementById('btn-kick');
 const $enemyButton = document.getElementById('btn-enemy-kick');
 const $randomButton = document.getElementById('btn-random');
+
 const  character = {
     name: 'Pikachu',
     defaultHP: 100,
@@ -65,5 +66,12 @@ function disableButton (){
 function random (num) {
     return Math.ceil(Math.random () * num);
 }
+
+
+
+function check() {
+    console.log('start')
+};
+check();
 
 init ();
