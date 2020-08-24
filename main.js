@@ -47,6 +47,8 @@ function init () {
 function renderHP (renderHP) {
     character.renderHPLife.apply(character);
     enemy.renderHPLife.apply(enemy);
+    character.renderProgressbarHP.apply(character);
+    enemy.renderProgressbarHP.apply(enemy);
 }
 function renderHPLife (renderHPLife) {
    
@@ -54,8 +56,7 @@ function renderHPLife (renderHPLife) {
 }
 
 function renderProgressbarHP (renderProgressbarHP) {
-    
-    this.elProgressbar.style.width = this.damageHP + '%';
+    this.elProgressbar.style.width = this.damageHP/this.defaultHP* 100 + '%';
 }
 
 function changeHP (count, person) {
