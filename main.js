@@ -2,7 +2,7 @@ function $getElById (id) {
     return document.getElementById(id);
    }
 
-
+   let htmlLogs;
 const  $btn = $getElById('btn-kick');
 const $enemyButton = $getElById('btn-enemy-kick');
 const $randomButton = $getElById('btn-random')
@@ -71,7 +71,7 @@ function changeHP (count) {
     
 const log = this === enemy ? generateLog(this, character, this.damageHP, this.defaultHP, count ) : generateLog (this, enemy, this.damageHP, this.defaultHP, count );
     log;
-
+    createHtmlLogs (htmlLogs);
     if ( this.damageHP <= 0) { 
         this.damageHP = 0;
         alert ('Бедный ' + this.name + '  проиграл бой');
@@ -108,22 +108,19 @@ const logs = [
     `${firstPerson.name} пытался что-то сказать, но вдруг, неожиданно ${secondPerson.name} со скуки, разбил бровь сопернику.  — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
 ];
 
-
-
-const $logs = document.querySelector('#logs');
-const $p = document.createElement('p');
-let i = logs[random(logs.length - 1)];
-$p.innerText = `${i}`;
-$logs.insertBefore($p, $logs.children[0]);
-
-
-
+ htmlLogs = logs[random(logs.length - 1)];
+return htmlLogs;
  
 }
 
+function createHtmlLogs (htmlLogs) {
+    const $logs = document.querySelector('#logs');
+    const $p = document.createElement('p');
+    let i = logs[random(logs.length - 1)];
+    $p.innerText = `${htmlLogs}`;
+    $logs.insertBefore($p, $logs.children[0]);
 
-
-
+}
 
 init();
 
