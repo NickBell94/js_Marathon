@@ -8,53 +8,67 @@ const  character = {
     damageHP: 100,
     elHP: document.getElementById('health-character'),
     elProgressbar: document.getElementById('progressbar-character'),
+    renderHP: renderHP,
+    changeHP: changeHP,
+    renderHPLife: renderHPLife,
+    renderProgressbarHP: renderProgressbarHP,
+    random: random,
 }
 const enemy = {
     name: 'Charmander',
     defaultHP: 100,
     damageHP: 100,
     elHP: document.getElementById('health-enemy'),
-    elProgressbar: document.getElementById('progressbar-enemy')
+    elProgressbar: document.getElementById('progressbar-enemy'),
+    renderHP: renderHP,
+    changeHP: changeHP,
+    renderHPLife: renderHPLife,
+    renderProgressbarHP: renderProgressbarHP,
+    random: random,
 }
 
 $btn.addEventListener('click', function () {
-    changeHP (random(20), character);
+    character.changeHP(random(20));
     });
 
 $enemyButton.addEventListener ('click', function () {
-    changeHP (random(20), enemy);
+    enemy.changeHP(random(20));
 })
 
 $randomButton.addEventListener ('click', function () {
-    Math.random() > .5 ? changeHP (random(20), character) : changeHP (random(20), enemy);
+    Math.random() > .5 ? character.changeHP(random(20)) : enemy.changeHP(random(20))
 })
 function init () {
-    renderHP(character);
-    renderHP(enemy);
+    character.renderHP();
+    enemy.renderHP();
     
 }
 
-function renderHP (person) {
-    renderHPLife (person);
-    renderProgressbarHP(person);
+function renderHP (renderHP) {
+    character.renderHPLife.apply(character);
+    enemy.renderHPLife.apply(enemy);
+    character.renderProgressbarHP.apply(character);
+    enemy.renderProgressbarHP.apply(enemy);
 }
-function renderHPLife (person) {
-    person.elHP.innerText = person.damageHP + '/' + person.defaultHP;
+function renderHPLife (renderHPLife) {
+   
+    this.elHP.innerText = this.damageHP + '/' + this.defaultHP;
 }
 
-function renderProgressbarHP (person) {
-person.elProgressbar.style.width = person.damageHP + '%';
+function renderProgressbarHP (renderProgressbarHP) {
+    this.elProgressbar.style.width = this.damageHP/this.defaultHP* 100 + '%';
 }
 
 function changeHP (count, person) {
-    if ( person.damageHP <= count) { 
-        person.damageHP = 0;
-        alert ('Бедный ' + person.name + '  проиграл бой');
+    
+    if ( this.damageHP <= count) { 
+        this.damageHP = 0;
+        alert ('Бедный ' + this.name + '  проиграл бой');
         disableButton ();
     } else {
-    person.damageHP -= count;
+        this.damageHP -= count;
     }
-    renderHP(person);
+    renderHP(this);
 }
 
 function disableButton (){
@@ -67,11 +81,8 @@ function random (num) {
     return Math.ceil(Math.random () * num);
 }
 
+init();
 
 
 
 
-
-
-
-init ();
