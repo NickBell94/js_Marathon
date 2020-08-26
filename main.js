@@ -1,6 +1,13 @@
-const  $btn = document.getElementById('btn-kick');
-const $enemyButton = document.getElementById('btn-enemy-kick');
-const $randomButton = document.getElementById('btn-random');
+function $getElById (id) {
+    return document.getElementById(id);
+   }
+
+
+const  $btn = $getElById('btn-kick');
+const $enemyButton = $getElById('btn-enemy-kick');
+const $randomButton = $getElById('btn-random')
+
+
 
 const  character = {
     name: 'Pikachu',
@@ -44,31 +51,35 @@ function init () {
     
 }
 
-function renderHP (renderHP) {
-    character.renderHPLife.apply(character);
-    enemy.renderHPLife.apply(enemy);
-    character.renderProgressbarHP.apply(character);
-    enemy.renderProgressbarHP.apply(enemy);
+function renderHP () {
+    this.renderHPLife();
+    this.renderProgressbarHP();
+    
 }
-function renderHPLife (renderHPLife) {
+function renderHPLife () {
    
     this.elHP.innerText = this.damageHP + '/' + this.defaultHP;
 }
 
-function renderProgressbarHP (renderProgressbarHP) {
+function renderProgressbarHP () {
     this.elProgressbar.style.width = this.damageHP/this.defaultHP* 100 + '%';
 }
 
-function changeHP (count, person) {
+function changeHP (count) {
+
+    this.damageHP -= count;
     
-    if ( this.damageHP <= count) { 
+const log = this === enemy ? generateLog(this, character, this.damageHP, this.defaultHP, count ) : generateLog (this, enemy, this.damageHP, this.defaultHP, count );
+    log;
+
+    if ( this.damageHP <= 0) { 
         this.damageHP = 0;
         alert ('Бедный ' + this.name + '  проиграл бой');
         disableButton ();
-    } else {
-        this.damageHP -= count;
-    }
-    renderHP(this);
+        
+    } 
+   
+    this.renderHP();
 }
 
 function disableButton (){
@@ -80,6 +91,39 @@ function disableButton (){
 function random (num) {
     return Math.ceil(Math.random () * num);
 }
+
+function generateLog (firstPerson,secondPerson,damageHP, defaultHP, count) {
+
+
+const logs = [
+    `${firstPerson.name} вспомнил что-то важное, но неожиданно ${secondPerson.name}, не помня себя от испуга, ударил в предплечье врага. — Нанесено урона ${count} XP [— Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ] ]` ,
+    `${firstPerson.name}, и за это ${secondPerson.name} с испугу приложил прямой удар коленом в лоб врага. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} забылся, но в это время наглый ${secondPerson.name}, приняв волевое решение, неслышно подойдя сзади, ударил. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} пришел в себя, но неожиданно ${secondPerson.name} случайно нанес мощнейший удар. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} поперхнулся, но в это время ${secondPerson.name} нехотя раздробил кулаком \<вырезанно цензурой\> противника. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} удивился, а ${secondPerson.name} пошатнувшись влепил подлый удар. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} высморкался, но неожиданно ${secondPerson.name} провел дробящий удар. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} пошатнулся, и внезапно наглый ${secondPerson.name} беспричинно ударил в ногу противника  — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} расстроился, как вдруг, неожиданно ${secondPerson.name} случайно влепил стопой в живот соперника. — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${firstPerson.name} пытался что-то сказать, но вдруг, неожиданно ${secondPerson.name} со скуки, разбил бровь сопернику.  — Нанесено урона ${count} XP [ ${damageHP} / ${defaultHP} ]`,
+];
+
+
+
+const $logs = document.querySelector('#logs');
+const $p = document.createElement('p');
+let i = logs[random(logs.length - 1)];
+$p.innerText = `${i}`;
+$logs.insertBefore($p, $logs.children[0]);
+
+
+
+ 
+}
+
+
+
+
 
 init();
 
