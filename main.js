@@ -69,7 +69,7 @@ function changeHP (count) {
 
     this.damageHP -= count;
     
-const log = this === enemy ? generateLog(this, character, this.damageHP, this.defaultHP, count ) : generateLog (this, enemy, this.damageHP, this.defaultHP, count );
+const log = this === enemy ? generateLog(this, character,  count ) : generateLog (this, enemy,  count );
     log;
     createHtmlLogs (htmlLogs);
     if ( this.damageHP <= 0) { 
@@ -92,20 +92,23 @@ function random (num) {
     return Math.ceil(Math.random () * num);
 }
 
-function generateLog (firstPerson,secondPerson,damageHP, defaultHP, count) {
+function generateLog (firstPerson,secondPerson, count) {
 
+    const {damageHP, defaultHP} = firstPerson;
+    const {name} = firstPerson;
+    const {name: nameEnemy} = secondPerson;
 
 const logs = [
-    `${firstPerson.name} вспомнил что-то важное, но неожиданно ${secondPerson.name}, не помня себя от испуга, ударил в предплечье врага. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ] ]` ,
-    `${firstPerson.name}, и за это ${secondPerson.name} с испугу приложил прямой удар коленом в лоб врага. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} забылся, но в это время наглый ${secondPerson.name}, приняв волевое решение, неслышно подойдя сзади, ударил. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} пришел в себя, но неожиданно ${secondPerson.name} случайно нанес мощнейший удар. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} поперхнулся, но в это время ${secondPerson.name} нехотя раздробил кулаком \<вырезанно цензурой\> противника. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} удивился, а ${secondPerson.name} пошатнувшись влепил подлый удар. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} высморкался, но неожиданно ${secondPerson.name} провел дробящий удар. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} пошатнулся, и внезапно наглый ${secondPerson.name} беспричинно ударил в ногу противника  — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} расстроился, как вдруг, неожиданно ${secondPerson.name} случайно влепил стопой в живот соперника. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
-    `${firstPerson.name} пытался что-то сказать, но вдруг, неожиданно ${secondPerson.name} со скуки, разбил бровь сопернику.  — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} вспомнил что-то важное, но неожиданно ${nameEnemy}, не помня себя от испуга, ударил в предплечье врага. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ] ]` ,
+    `${name}, и за это ${nameEnemy} с испугу приложил прямой удар коленом в лоб врага. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} забылся, но в это время наглый ${nameEnemy}, приняв волевое решение, неслышно подойдя сзади, ударил. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} пришел в себя, но неожиданно ${nameEnemy} случайно нанес мощнейший удар. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} поперхнулся, но в это время ${nameEnemy} нехотя раздробил кулаком \<вырезанно цензурой\> противника. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} удивился, а ${nameEnemy} пошатнувшись влепил подлый удар. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} высморкался, но неожиданно ${nameEnemy} провел дробящий удар. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} пошатнулся, и внезапно наглый ${nameEnemy} беспричинно ударил в ногу противника  — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} расстроился, как вдруг, неожиданно ${nameEnemy} случайно влепил стопой в живот соперника. — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
+    `${name} пытался что-то сказать, но вдруг, неожиданно ${nameEnemy} со скуки, разбил бровь сопернику.  — Нанесено урона -${count} XP [ ${damageHP} / ${defaultHP} ]`,
 ];
 
  htmlLogs = logs[random(logs.length - 1)];
