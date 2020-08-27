@@ -94,8 +94,7 @@ function random (num) {
 
 function generateLog (firstPerson,secondPerson, count) {
 
-    const {damageHP, defaultHP} = firstPerson;
-    const {name} = firstPerson;
+    const {name, damageHP, defaultHP} = firstPerson;
     const {name: nameEnemy} = secondPerson;
 
 const logs = [
