@@ -2,11 +2,11 @@ function $getElById (id) {
     return document.getElementById(id);
    }
 
-   let htmlLogs;
+let htmlLogs;
 const  $btn = $getElById('btn-kick');
 const $enemyButton = $getElById('btn-enemy-kick');
 const $randomButton = $getElById('btn-random')
-
+const random =  (num) => Math.ceil(Math.random () * num);
 
 
 const  character = {
@@ -34,17 +34,64 @@ const enemy = {
     random: random,
 }
 
+const firstButtonClick = clickCounter();
+const randomButtonClick  = clickCounter();
+const secondButtonClick = clickCounter();
+
+
+
+function clickCounter (button) { 
+    
+    let counter = 1; 
+
+
+    return  {
+        counterClick: function (button,press = 6) {
+        console.log(`Сделано кликов  ${counter} по кнопке ${button.id},  осталось ${press-counter} кликов`);  
+        button.textContent = `${button.id} Сlicks left -  ${press-counter} `
+           
+        if ( counter >= press){
+            button.disabled = true;
+            confirm('Limit reached, please try again later')
+        } 
+        counter++;
+    }, 
+    reset: function (button) {
+        counter = 1; 
+        button.disabled = false; 
+        button.textContent = `${button.id} You can click here again!`
+    }
+}
+}
+
+
+
+
+
+
 $btn.addEventListener('click', function () {
+    secondButtonClick.reset($enemyButton);
+    randomButtonClick.reset($randomButton);
     character.changeHP(random(20));
+    firstButtonClick.counterClick($btn);
+    
     });
 
 $enemyButton.addEventListener ('click', function () {
+    firstButtonClick.reset($btn);
+    randomButtonClick.reset($randomButton);
     enemy.changeHP(random(20));
-})
+    secondButtonClick.counterClick($enemyButton);
+});
 
 $randomButton.addEventListener ('click', function () {
-    Math.random() > .5 ? character.changeHP(random(20)) : enemy.changeHP(random(20))
-})
+    firstButtonClick.reset($btn);
+    secondButtonClick.reset($enemyButton);
+    randomButtonClick.counterClick($randomButton);
+    Math.random() > .5 ? character.changeHP(random(20)) : enemy.changeHP(random(20));
+
+});
+
 function init () {
     character.renderHP();
     enemy.renderHP();
@@ -88,9 +135,8 @@ function disableButton (){
     $randomButton.disabled = true;
 }
 
-function random (num) {
-    return Math.ceil(Math.random () * num);
-}
+
+
 
 function generateLog (firstPerson,secondPerson, count) {
 
@@ -125,7 +171,4 @@ function createHtmlLogs (htmlLogs) {
 }
 
 init();
-
-
-
 
