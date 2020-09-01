@@ -1,10 +1,3 @@
-class Buttons {
-    constructor(buttonName){
-        buttonName = document.getElementById(id);
-    }
-}
-
-
 class Selectors {
     constructor (name) {
         this.elHP = document.getElementById(`health-${name}`);
@@ -47,8 +40,6 @@ renderHP = () => {
  
     if ( this.hp.current <= 0) { 
         this.hp.current= 0;
-        this.disabled = true;
-      console.log(this);
        
         alert ('Бедный ' + this.name + '  проиграл бой');
     } 
