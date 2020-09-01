@@ -1,3 +1,4 @@
+import random from "./utils.js"
 import Pokemon from "./pokemon.js";
 
 
@@ -25,7 +26,7 @@ function $getElById (id) {
    const  $btn = $getElById('btn-kick');
    const $enemyButton = $getElById('btn-enemy-kick');
    const $randomButton = $getElById('btn-random')
-   const random =  (num) => Math.ceil(Math.random () * num);
+   
 
 
 
@@ -52,7 +53,7 @@ function countBtn (count = 15, el) {
 }
 
 $btn.addEventListener('click', function () {
-    player1.changeHP(random(60), function (count) {
+    player1.changeHP(random(60, 20), function (count) {
          console.log(generateLog(player1, player2, count));
         createHtmlLogs (htmlLogs);
         disabledButtons(player1.hp.current);
@@ -61,7 +62,7 @@ $btn.addEventListener('click', function () {
     });
 
 $enemyButton.addEventListener ('click', function () {
-    player2.changeHP(random(60), function (count) {
+    player2.changeHP(random(60, 10), function (count) {
         console.log(generateLog(player1, player2, count));
        createHtmlLogs (htmlLogs);
        disabledButtons(player2.hp.current);
@@ -70,13 +71,13 @@ $enemyButton.addEventListener ('click', function () {
 });
 
 $randomButton.addEventListener ('click', function () {
-const firstPlayer = player1.changeHP(random(60), function (count) {
+const firstPlayer = player1.changeHP(random(60, 20), function (count) {
     console.log(generateLog(player1, player2, count));
    createHtmlLogs (htmlLogs);
    disabledButtons(player1.hp.current);
 });
 
-const secondPlayer = player2.changeHP(random(60), function (count) {
+const secondPlayer = player2.changeHP(random(60, 10), function (count) {
     console.log(generateLog(player1, player2, count));
    createHtmlLogs (htmlLogs);
    disabledButtons(player2.hp.current);
