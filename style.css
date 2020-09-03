@@ -41,6 +41,19 @@ body {
     position: relative;
     margin: 20px;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.control-2 {
+    width: 320px;
+    height: 260px;
+    position: relative;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -277,6 +290,7 @@ body {
     outline: none !important;
     cursor: pointer;
     font-size: 18px;
+    margin: 5px auto;
 
 }
 .button:after {
