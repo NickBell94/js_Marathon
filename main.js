@@ -60,7 +60,7 @@ player2.attacks.forEach( item => {
     $btn.innerText = item.name;
     const btnCount = countBtn(item.maxCount,$btn);
     $btn.addEventListener('click', () => {
-        player2.changeHP(random(item.maxDamage,item.minDamage) , function (count) {
+        player2.changeHP(random(item.maxDamage,item.minDamage), player1, function (count) {
             console.log(generateLog(player1, player2, count));
             if(player1.hp.current <= 0) {
                 
