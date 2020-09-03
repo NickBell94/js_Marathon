@@ -40,14 +40,15 @@ player1.attacks.forEach( item => {
             if(player2.hp.current <= 0) {
                 //attack1();
                 resetPokemon2();
-                alert('Вы проиграли');
+                
             } else {
                 let attack = player2.attacks[Math.floor(Math.random()*player2.attacks.length)];
                 player2.changeHP(random(attack.maxDamage,attack.minDamage), player1, function (count) {
                     console.log(generateLog(player1, player2, count));
                     if(player1.hp.current <= 0) {
                         resetPokemon1();
-                        attack1();
+                        alert('Вы проиграли');
+                        
                        
                     }
                    
