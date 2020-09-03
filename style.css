@@ -58,6 +58,16 @@ body {
     align-items: center;
 }
 
+.control-3 {
+    width: 320px;
+    height: 260px;
+    position: relative;
+    margin:  auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .playground {
     max-width: 1024px;
     display: flex;
