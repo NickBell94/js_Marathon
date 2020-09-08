@@ -6,20 +6,19 @@ function $getElById (id) {
     return document.getElementById(id);
    }
 
-function countBtn (count = 15, el) { 
-    
+function countBtn (maxCount, el) { 
     const innerText = el.innerText;
     
-    el.innerText = `${innerText}(${count})`;
+    el.innerText = `${innerText}(${maxCount})`;
  return function () {
-    count --;
+    maxCount --;
      
-     if (count == 0) {
+     if (maxCount == 0) {
          el.disabled = true;
      }
     
-     el.innerText = `${innerText}(${count})`;
-     return count;
+     el.innerText = `${innerText}(${maxCount})`;
+     return maxCount;
  }
 }
 
